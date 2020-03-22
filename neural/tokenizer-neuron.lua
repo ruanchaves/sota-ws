@@ -5,7 +5,7 @@
 require 'torch'
 require 'lfs'
 local fun = require 'fun' 
-require 'rnnlm.lua' 
+require 'rnnlm' 
 
 function spairs(t, order)
 	local keys = {}
