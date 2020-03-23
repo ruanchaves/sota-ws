@@ -42,19 +42,15 @@ ENV PATH=$PATH:/usr/local/cuda-8.0/bin
 # install torch
 RUN git clone https://github.com/torch/distro.git /torch --recursive \
     && cd /torch \
-    && ./install.sh \
+    && yes | ./install.sh \
     && cd ..
 
-# install rnn
-RUN git clone https://github.com/Element-Research/rnn.git /rnn --recursive \
-    && cd /rnn \
-    && /torch/install/bin/luarocks make rocks/rnn-scm-1.rockspec
-
 # install torch deps
-RUN /torch/install/bin/luarocks install dpnn \
+RUN /torch/install/bin/luarocks install rnn \
+    && /torch/install/bin/luarocks install dpnn \
     && /torch/install/bin/luarocks install optim \
-    && /torch/install/bin/luarocks install cunn \  
-    && /torch/install/bin/luarocks install cudnn \ 
+    && /torch/install/bin/luarocks install cunn \
+    && /torch/install/bin/luarocks install cudnn \
     && /torch/install/bin/luarocks install luautf8 \
     && /torch/install/bin/luarocks install penlight \
     && /torch/install/bin/luarocks install moses \
@@ -77,6 +73,12 @@ ENV LUA_PATH='/root/.luarocks/share/lua/5.1/?.lua;/root/.luarocks/share/lua/5.1/
 
 # clean up
 RUN apt-get autoremove && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# install rnn
+RUN /torch/install/bin/luarocks remove rnn
+RUN git clone https://github.com/Element-Research/rnn.git /rnn --recursive \
+    && cd /rnn \
+    && /torch/install/bin/luarocks make rocks/rnn-scm-1.rockspec
 
 # install project-specific packages
 RUN /torch/install/bin/luarocks install fun
