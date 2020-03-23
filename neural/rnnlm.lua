@@ -11,7 +11,7 @@ require 'dpnn'
 require 'nngraph'
 require 'datait'
 local fun = require 'fun'
-require 'yo'
+-- require 'yo'
 
 function nextByteLogProb(str, rnn)  
 	rnn:evaluate()
