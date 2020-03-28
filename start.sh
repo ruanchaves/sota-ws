@@ -4,6 +4,8 @@ DOCKER_MAJOR_VERSION_STRING=$(docker -v | grep -oP '([0-9]+)' | sed -n 1p)
 DOCKER_MINOR_VERSION_STRING=$(docker -v | grep -oP '([0-9]+)' | sed -n 2p)
 ps_test=$(docker ps -a)
 
+ENTRYPOINT=$ENTRYPOINT
+
 DOCKER_MAJOR_VERSION=$((10#$DOCKER_MAJOR_VERSION_STRING))
 DOCKER_MINOR_VERSION=$((10#$DOCKER_MINOR_VERSION_STRING))
 
@@ -29,27 +31,30 @@ elif [[ -z $build_test ]] && [[ -z $ps_test ]]; then
     sudo docker build -t djacquila/sota-ws:1.0 .
 fi
 
-CUDA_VISIBLE_DEVICES=$CUDA_VISIBLE_DEVICES
 if [[ -n $ps_test ]] && [[ $recent_version -eq 1 ]]; then
     docker run --gpus all \
         -v `pwd`:/home \
-        --env CUDA_VISIBLE_DEVICES=$CUDA_VISIBLE_DEVICES \
-        -it --rm djacquila/sota-ws:1.0
+        --env-file env.list \
+        --name sotaws \
+        -it --rm djacquila/sota-ws:1.0 bash 
 elif [[ -n $ps_test ]] && [[ $recent_version -eq 0 ]]; then
     nvidia-docker run \
         -v `pwd`:/home \
-        --env CUDA_VISIBLE_DEVICES=$CUDA_VISIBLE_DEVICES \
-        -it --rm djacquila/sota-ws:1.0
+        --env-file env.list \
+        --name sotaws \
+        -it --rm djacquila/sota-ws:1.0 bash 
 elif [[ -z $ps_test ]] && [[ $recent_version -eq 1 ]]; then
     sudo -E docker run --gpus all \
         -v `pwd`:/home \
-        --env CUDA_VISIBLE_DEVICES=$CUDA_VISIBLE_DEVICES \
-        -it --rm djacquila/sota-ws:1.0
+        --env-file env.list \
+        --name sotaws \
+        -it --rm djacquila/sota-ws:1.0 bash 
 elif [[ -z $ps_test ]] && [[ $recent_version -eq 0 ]]; then
     sudo -E nvidia-docker run \
         -v `pwd`:/home \
-        --env CUDA_VISIBLE_DEVICES=$CUDA_VISIBLE_DEVICES \
-        -it --rm djacquila/sota-ws:1.0
+        --env-file env.list \
+        --name sotaws \
+        -it --rm djacquila/sota-ws:1.0 bash
 else
     echo "Not found."
 fi

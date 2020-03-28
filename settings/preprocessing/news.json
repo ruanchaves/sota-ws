@@ -1,0 +1,14 @@
+[
+    {
+        "original": "/home/user/train_news.2016.en.shuffled.csv",
+       "target": "./corpora/news/en/processed/train.txt"
+    },
+    {
+        "original": "/home/user/dev_news.2016.en.shuffled.csv",
+        "target": "./corpora/news/en/processed/dev.txt"
+    },
+    {
+        "original": "/home/user/test_news.2016.en.shuffled.csv",
+        "target": "./corpora/news/en/processed/test.txt"
+    }
+]

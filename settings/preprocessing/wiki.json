@@ -1,0 +1,26 @@
+[
+    {
+        "original": "./corpora/wiki/en/original/dev_enwiki_2019_11_30.csv",
+       "target": "./corpora/wiki/en/processed/dev.txt"
+    },
+    {
+        "original": "./corpora/wiki/en/original/test_enwiki_2019_11_30.csv",
+        "target": "./corpora/wiki/en/processed/test.txt"
+    },
+    {
+        "original": "./corpora/wiki/en/original/train_enwiki_2019_11_30.csv",
+        "target": "./corpora/wiki/en/processed/train.txt"
+    },
+    {
+        "original": "./corpora/wiki/pt/original/dev_ptwiki_2019_11_26.csv",
+        "target": "./corpora/wiki/pt/processed/dev.txt"
+    },
+    {
+        "original": "./corpora/wiki/pt/original/test_ptwiki_2019_11_26.csv",
+        "target": "./corpora/wiki/pt/processed/test.txt"
+    },
+    {
+        "original": "./corpora/wiki/pt/original/train_ptwiki_2019_11_26.csv",
+        "target": "./corpora/wiki/pt/processed/train.txt"
+    }       
+]

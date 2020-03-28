@@ -1,0 +1,6 @@
+CUDA_VISIBLE_DEVICES=0
+DATA_DIR=corpora/news/en/processed
+MODEL_DIR=uncased_L-2_H-128_A-2
+CHECKPOINT=uncased_L-2_H-128_A-2
+OUTPUT_DIR=./output/tinybert_news/
+TEST_NAME=training_tinybert_news
