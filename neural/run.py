@@ -9,7 +9,6 @@ settings = {
 
 def model_func(phrase):
     cmd = "luajit tokenizer-neuron.lua -model %s \"%s\"" % (settings['model'], phrase.strip())
-    print(cmd)
     out = subprocess.Popen(cmd.split(' '), 
            stdout=subprocess.PIPE, 
            stderr=subprocess.STDOUT)
