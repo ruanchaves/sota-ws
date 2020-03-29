@@ -3,8 +3,8 @@ import multiprocessing
 import subprocess 
 import os
 settings = {
-        "model" : "../models/1500x3-en.t7",
-        "dataset": "/home/test.txt"
+        "model" : os.environ['MODEL_DIR'],
+        "dataset": os.path.join(os.environ['DATA_DIR'], os.environ['FILENAME'])
 }
 
 def model_func(phrase):
@@ -26,5 +26,4 @@ if __name__ == '__main__':
     with open(settings['dataset'],'r') as f:
         for idx, line in enumerate(f):
             line_array.append(line)
-    line_array = line_array[0:10]
     result_list = pool.map(model_func, line_array)
