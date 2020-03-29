@@ -21,7 +21,7 @@ def model_func(phrase):
         return None
 
 if __name__ == '__main__':
-    pool = multiprocessing.Pool(processes=os.environ['PROCESSES'])
+    pool = multiprocessing.Pool(processes=int(os.environ['PROCESSES']))
     line_array = []
     with open(settings['dataset'],'r') as f:
         for idx, line in enumerate(f):
